@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Investment Guide</title>
+    <meta name="description" content="A simple, beginner-friendly Robo-Advisor and Investment Dashboard.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Ionicons for Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+
+    <!-- Intro Animation Screen -->
+    <div id="intro-screen">
+        <div class="intro-scene">
+            <!-- 3D Container -->
+            <div class="orbit-container">
+                <div class="rocket-wrapper">
+                    <ion-icon name="rocket" class="orbiting-rocket"></ion-icon>
+                </div>
+            </div>
+
+            <!-- Text Content (Center) -->
+            <div class="intro-content">
+                <h1 class="intro-title">
+                    <span class="smart-text">Smart</span><span class="invest-text">Invest</span>
+                </h1>
+                <p class="intro-subtitle">Your Journey to Financial Freedom Begins Here.</p>
+                <div class="loading-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-btn" onclick="toggleSidebar()">
+            <ion-icon name="menu-outline"></ion-icon>
+        </button>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">Simple<span>Invest</span>.</div>
+
+            <nav class="side-nav">
+                <ul>
+                    <li class="active" onclick="showSection('dashboard')">
+                        <ion-icon name="grid-outline"></ion-icon>
+                        <span>Dashboard</span>
+                    </li>
+                    <li onclick="showSection('chat')">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                        <span>AI Planner</span>
+                    </li>
+                    <li onclick="showSection('portfolio')">
+                        <ion-icon name="trending-up-outline"></ion-icon>
+                        <span>My Portfolio</span>
+                    </li>
+                    <li onclick="showSection('settings')">
+                        <ion-icon name="settings-outline"></ion-icon>
+                        <span>Settings</span>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Advisor Button (Bottom Left) -->
+            <div class="advisor-btn-wrapper">
+                <button class="advisor-trigger" onclick="showSection('advisor')">
+                    <div class="icon-box">
+                        <ion-icon name="bulb-outline"></ion-icon>
+                    </div>
+                    <div class="text-content">
+                        <span class="title">Get Advice</span>
+                        <span class="subtitle">Robo-Advisor</span>
+                    </div>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Dashboard View -->
+            <section id="dashboard" class="content-section active">
+                <header class="top-bar">
+                    <div class="welcome-text">
+                        <h1>Hello, Investor! 👋</h1>
+                        <p>Explore investment methods tailored for you.</p>
+                    </div>
+                </header>
+
+                <div class="dashboard-grid">
+                    <!-- Investment Cards with Animations -->
+                    <div class="method-card" style="--delay: 0s">
+                        <div class="card-icon color-1"><ion-icon name="bar-chart-outline"></ion-icon></div>
+                        <h3>Stocks</h3>
+                        <p>High risk, high reward. Ownership in companies.</p>
+                        <button class="btn-sm" onclick="openDetail('stocks')">Explore</button>
+                    </div>
+
+                    <div class="method-card" style="--delay: 0.1s">
+                        <div class="card-icon color-2"><ion-icon name="pie-chart-outline"></ion-icon></div>
+                        <h3>Mutual Funds</h3>
+                        <p>Professionally managed. Diversified portfolio.</p>
+                        <button class="btn-sm" onclick="openDetail('funds')">Explore</button>
+                    </div>
+
+                    <div class="method-card" style="--delay: 0.2s">
+                        <div class="card-icon color-3"><ion-icon name="shield-checkmark-outline"></ion-icon></div>
+                        <h3>Fixed Deposits</h3>
+                        <p>Guaranteed returns. Safe and steady growth.</p>
+                        <button class="btn-sm" onclick="openDetail('fd')">Explore</button>
+                    </div>
+
+                    <div class="method-card" style="--delay: 0.3s">
+                        <div class="card-icon color-4"><ion-icon name="flash-outline"></ion-icon></div>
+                        <h3>Crypto</h3>
+                        <p>Volatile digital assets. Future of finance?</p>
+                        <button class="btn-sm" onclick="openDetail('crypto')">Explore</button>
+                    </div>
+
+                    <div class="method-card" style="--delay: 0.4s">
+                        <div class="card-icon color-5"><ion-icon name="leaf-outline"></ion-icon></div>
+                        <h3>Green Bonds</h3>
+                        <p>Invest in eco-friendly projects.</p>
+                        <button class="btn-sm" onclick="openDetail('eco')">Explore</button>
+                    </div>
+
+                    <div class="method-card" style="--delay: 0.5s">
+                        <div class="card-icon color-6"><ion-icon name="gold-outline"></ion-icon></div>
+                        <h3>Gold</h3>
+                        <p>Hedge against inflation. Timeless asset.</p>
+                        <button class="btn-sm" onclick="openDetail('gold')">Explore</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advisor Section (Integrated) -->
+            <section id="advisor" class="content-section">
+                <div class="advisor-container">
+                    <div class="advisor-header">
+                        <button class="back-btn" onclick="showSection('dashboard')"><ion-icon
+                                name="arrow-back-outline"></ion-icon> Back</button>
+                        <h2>Robo-Advisor</h2>
+                    </div>
+
+                    <div class="card advisor-card">
+                        <!-- Question Form -->
+                        <div id="advisor-form">
+                            <div class="step-indicator">Step <span id="current-step">1</span> of 3</div>
+
+                            <form id="investment-form">
+                                <!-- Question 1: Income -->
+                                <div class="form-step active" data-step="1">
+                                    <h2>What is your monthly income?</h2>
+                                    <div class="input-wrapper">
+                                        <input type="number" id="income-input" class="modern-input"
+                                            placeholder="e.g. 25000" min="0">
+                                    </div>
+
+                                    <button type="button" class="btn btn-next" onclick="nextStep(1)">Next <span
+                                            class="arrow">→</span></button>
+                                </div>
+
+                                <!-- Question 2: Risk -->
+                                <div class="form-step" data-step="2">
+                                    <h2>How do you feel about risk?</h2>
+                                    <div class="options-grid">
+                                        <label class="option-card">
+                                            <input type="radio" name="risk" value="low" required>
+                                            <div class="option-content">
+                                                <span class="emoji">😌</span>
+                                                <span class="label">Low Risk</span>
+                                                <span class="sub-label">Safe & Steady. I hate losing money.</span>
+                                            </div>
+                                        </label>
+                                        <label class="option-card">
+                                            <input type="radio" name="risk" value="medium">
+                                            <div class="option-content">
+                                                <span class="emoji">😎</span>
+                                                <span class="label">Medium Risk</span>
+                                                <span class="sub-label">Balanced. Okay with some ups and downs.</span>
+                                            </div>
+                                        </label>
+                                        <label class="option-card">
+                                            <input type="radio" name="risk" value="high">
+                                            <div class="option-content">
+                                                <span class="emoji">😈</span>
+                                                <span class="label">High Risk</span>
+                                                <span class="sub-label">Aggressive. I want high returns.</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary"
+                                            onclick="prevStep(2)">Back</button>
+                                        <button type="button" class="btn btn-next" onclick="nextStep(2)">Next <span
+                                                class="arrow">→</span></button>
+                                    </div>
+                                </div>
+
+                                <!-- Question 3: Goal -->
+                                <div class="form-step" data-step="3">
+                                    <h2>What is your primary investment goal?</h2>
+                                    <div class="options-grid">
+                                        <label class="option-card">
+                                            <input type="radio" name="goal" value="short" required>
+                                            <div class="option-content">
+                                                <span class="emoji">🏖️</span>
+                                                <span class="label">Short Term</span>
+                                                <span class="sub-label">Vacation, gadget (1-3 years)</span>
+                                            </div>
+                                        </label>
+                                        <label class="option-card">
+                                            <input type="radio" name="goal" value="long">
+                                            <div class="option-content">
+                                                <span class="emoji">🏡</span>
+                                                <span class="label">Long Term</span>
+                                                <span class="sub-label">Wealth, retirement (5+ years)</span>
+                                            </div>
+                                        </label>
+                                        <label class="option-card">
+                                            <input type="radio" name="goal" value="emergency">
+                                            <div class="option-content">
+                                                <span class="emoji">🚑</span>
+                                                <span class="label">Emergency</span>
+                                                <span class="sub-label">Safety net</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary"
+                                            onclick="prevStep(3)">Back</button>
+                                        <button type="button" class="btn btn-submit" id="submit-btn"
+                                            onclick="calculateResult()">Get Advice</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Results Section -->
+                        <div id="advisor-result" class="result-container hidden">
+                            <div class="result-header">
+                                <h2>Your Personalized Plan</h2>
+                                <p>Here is what we recommend based on your profile.</p>
+                            </div>
+
+                            <div class="recommendation-card">
+                                <div class="rec-icon" id="rec-icon">🌟</div>
+                                <h3 id="rec-title">Balanced Mutual Funds</h3>
+                                <p id="rec-desc" class="rec-description">A balanced mix of equity and debt.</p>
+
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Risk Level</span>
+                                        <span class="stat-value" id="rec-risk">Medium</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Expected Return</span>
+                                        <span class="stat-value" id="rec-return">8-10%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="action-area">
+                                <button onclick="resetAdvisor()" class="btn btn-secondary">Start Over</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Chatbot Section -->
+            <section id="chat" class="content-section">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h2><ion-icon name="sparkles"></ion-icon> AI Investment Planner</h2>
+                        <p>Ask me anything about finance!</p>
+                    </div>
+                    <div class="chat-box" id="chat-box">
+                        <div class="message bot-message">
+                            Hello! I am your AI Investment Assistant. How can I help you plan your finances today?
+                        </div>
+                        <!-- Messages will appear here -->
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="user-input" placeholder="Type your question..."
+                            onkeypress="handleChat(event)">
+                        <button onclick="sendMessage()"><ion-icon name="send"></ion-icon></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Portfolio Section -->
+            <section id="portfolio" class="content-section">
+                <header class="top-bar">
+                    <h1>My Portfolio</h1>
+                    <p>Track your investments and growth.</p>
+                </header>
+
+                <div class="empty-state">
+                    <div class="empty-icon"><ion-icon name="wallet-outline"></ion-icon></div>
+                    <h3>Your portfolio is empty</h3>
+                    <p>Start exploring investment methods to build your wealth!</p>
+                    <button class="btn btn-primary" onclick="showSection('dashboard')">Find Investments</button>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="content-section">
+                <header class="top-bar">
+                    <h1>Settings</h1>
+                    <p>Manage your account and preferences.</p>
+                </header>
+
+                <div class="card settings-card">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-label">Dark Mode</span>
+                            <span class="setting-desc">Switch between light and dark themes</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="dark-mode-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-label">Notifications</span>
+                            <span class="setting-desc">Get updates on market trends</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-label">Currency</span>
+                            <span class="setting-desc">Display values in USD or INR</span>
+                        </div>
+                        <select class="modern-select">
+                            <option>INR (₹)</option>
+                            <option>USD ($)</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detail View (Generic for Explore) -->
+            <section id="details-view" class="content-section">
+                <button class="back-btn" onclick="showSection('dashboard')"><ion-icon
+                        name="arrow-back-outline"></ion-icon> Back to Dashboard</button>
+
+                <div class="detail-container">
+                    <div class="detail-header">
+                        <div class="icon-large" id="detail-icon">📈</div>
+                        <div class="detail-title-area">
+                            <h1 id="detail-title">Stock Market</h1>
+                            <span class="badge" id="detail-risk">High Risk</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-body">
+                        <h3>What is it?</h3>
+                        <p id="detail-desc">Stocks represent partial ownership in a company. When the company grows,
+                            your investment grows.</p>
+
+                        <div class="key-stats">
+                            <div class="k-stat">
+                                <span class="label">Avg Return</span>
+                                <span class="val" id="detail-return">12-15%</span>
+                            </div>
+                            <div class="k-stat">
+                                <span class="label">Min Investment</span>
+                                <span class="val" id="detail-min">₹500</span>
+                            </div>
+                            <div class="k-stat">
+                                <span class="label">Lock-in</span>
+                                <span class="val" id="detail-lock">None</span>
+                            </div>
+                        </div>
+
+                        <!-- Investment Amount Input -->
+                        <div class="investment-input-section" style="margin-bottom: 20px;">
+                            <label for="invest-amount"
+                                style="display:block; margin-bottom: 8px; font-weight: 500;">Enter Amount to Invest
+                                (₹)</label>
+                            <input type="number" id="invest-amount" class="modern-input" placeholder="e.g. 5000">
+                        </div>
+
+                        <div class="action-row">
+                            <button class="btn btn-primary" onclick="startInvesting()">Start Investing</button>
+                            <button class="btn btn-secondary">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="chat.js"></script>
+</body>
+
+</html>
